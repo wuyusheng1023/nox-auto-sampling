@@ -1,3 +1,10 @@
-.DS_Store
-software_development.md
+.vscode/
 venv/
+docs/
+
+.DS_Store
+
+__pycache__
+
+software_development.md
+references.md

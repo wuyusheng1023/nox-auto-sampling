@@ -82,7 +82,7 @@ class TestNOxAnalyzer():
     assert data['data'] == 'NOx analyzer'
     assert all([x in data['params'].keys() for x in NOX_ANALYZER.keys()])
 
-  def test_push_nox_mock_data_to_resdis(self):
+  def test_push_nox_mock_data_to_redis(self):
     r = redis.Redis(host='localhost', port=6379, db=0)
     nox = NOxAnalyzer(NOX_ANALYZER)
     while r.rpop('data'):

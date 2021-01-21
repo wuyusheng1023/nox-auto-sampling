@@ -36,4 +36,5 @@ class NOxAnalyzer():
       params = self._get_mock_raw_data(set_points)
       params['datetime'] = str(datetime.utcnow())
       data = {'data': 'NOx analyzer', 'params': params}
-      self.r.lpush('data', json.dumps(data))
+      list_len = self.r.lpush('data', json.dumps(data))
+      return list_len

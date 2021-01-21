@@ -1,6 +1,6 @@
 import redis
 
-from ..data import NOX_ANALYZER
+from ..mock_data import NOX_ANALYZER
 from ..worker import get_random_coef, set_init_mock_redis, NOxAnalyzer
 
 

@@ -3,7 +3,7 @@ from copy import copy
 import numpy as np
 import redis
 
-from .data import NOX_ANALYZER, MFC_SETPOINT, UPS
+from .mock_data import NOX_ANALYZER, MFC_SETPOINT, UPS
 
 
 mfc = {'set': MFC_SETPOINT, 'read': 0}

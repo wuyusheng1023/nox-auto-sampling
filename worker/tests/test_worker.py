@@ -62,8 +62,8 @@ class TestNOxAnalyzer():
     nox = NOxAnalyzer(NOX_ANALYZER)
     while r.rpop('data'):
       r.rpop('data')
-    nox.push_data_to_redis(data='111')
-    nox.push_data_to_redis(data='222')
+    nox.push_mock_data_to_redis(data='111')
+    nox.push_mock_data_to_redis(data='222')
     sleep(0.1)
     x_1 = r.rpop('data').decode('utf-8')
     x_2 = r.rpop('data').decode('utf-8')
@@ -76,6 +76,18 @@ class TestNOxAnalyzer():
     params['datetime'] = str(datetime.utcnow())
     data = {'data': 'NOx analyzer', 'params': params}
     r.lpush('data', json.dumps(data))
+    sleep(0.1)
+    data = json.loads(r.rpop('data').decode('utf-8'))
+    assert 'data' in data.keys()
+    assert data['data'] == 'NOx analyzer'
+    assert all([x in data['params'].keys() for x in NOX_ANALYZER.keys()])
+
+  def test_push_nox_mock_data_to_resdis(self):
+    r = redis.Redis(host='localhost', port=6379, db=0)
+    nox = NOxAnalyzer(NOX_ANALYZER)
+    while r.rpop('data'):
+      r.rpop('data')
+    nox.push_mock_data_to_redis()
     sleep(0.1)
     data = json.loads(r.rpop('data').decode('utf-8'))
     assert 'data' in data.keys()

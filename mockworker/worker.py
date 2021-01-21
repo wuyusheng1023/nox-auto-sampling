@@ -10,7 +10,10 @@ ups = UPS
 
 
 def get_random_coef():
-  pass
+  x = np.random.normal(1, 0.0025)
+  x = 1.0075 if x > 1.0075 else x
+  x = 0.9925 if x < 0.9925 else x
+  return x
 
 
 class NOxAnalyzer():
@@ -19,4 +22,5 @@ class NOxAnalyzer():
     self.data = copy(NOX_ANALYZER)
 
   def _get_raw_data(self):
-    self.data = None
+    # self.data = None
+    pass

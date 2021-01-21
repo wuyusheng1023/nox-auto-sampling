@@ -7,7 +7,7 @@ import redis
 
 from ..mock_data import NOX_ANALYZER
 from ..nox_analyzer import NOxAnalyzer
-from ..worker import get_random_coef, set_init_mock_redis
+from ..helpers import get_random_coef, set_init_mock_redis
 
 
 class TestGetRandomCoef():

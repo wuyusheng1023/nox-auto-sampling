@@ -3,12 +3,6 @@ import json
 import numpy as np
 import redis
 
-from .mock_data import MFC_SETPOINT, UPS
-
-
-mfc = {'set': MFC_SETPOINT, 'read': 0}
-ups = UPS
-
 
 def get_random_coef():
   x = np.random.normal(1, 0.0025)

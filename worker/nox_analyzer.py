@@ -5,7 +5,7 @@ import json
 import redis
 
 from .mock_data import NOX_ANALYZER
-from .worker import get_random_coef
+from .helpers import get_random_coef
 
 
 class NOxAnalyzer():

@@ -20,7 +20,7 @@ class TestNOxAnalyzer():
     nox = NOxAnalyzer(NOX_ANALYZER)
     assert nox.data == NOX_ANALYZER
 
-  def test_get_raw_data_is_nonempy(self):
+  def test_get_raw_data_is_nonempty(self):
     nox = NOxAnalyzer(NOX_ANALYZER)
     nox._get_raw_data()
     assert nox.data

@@ -10,8 +10,7 @@ ups = UPS
 class NOxAnalyzer():
 
   def __init__(self, data=None):
-    if not data:
-      self.data = copy(NOX_ANALYZER)
+    self.data = copy(NOX_ANALYZER)
 
   def _get_raw_data(self):
-    pass
+    self.data = None

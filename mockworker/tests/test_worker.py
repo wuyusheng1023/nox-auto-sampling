@@ -1,3 +1,5 @@
+import redis
+
 from ..data import NOX_ANALYZER
 from ..worker import get_random_coef, NOxAnalyzer
 
@@ -14,6 +16,14 @@ class TestGetRandomCoef():
     assert get_random_coef() != get_random_coef()
 
 
+class TestGetRedisKey():
+
+  def test_redis_server_is_on(self):
+    r = redis.Redis(host='localhost', port=6379, db=0)
+    r.set('foo', 'bar')  # True
+    assert r.get('foo') == b'bar'
+
+
 class TestNOxAnalyzer():
 
   def test_class_init_properly_with_mock_data(self):
@@ -25,3 +35,10 @@ class TestNOxAnalyzer():
     nox._get_raw_data()
     assert nox.data
   
+  def test_get_raw_data_is_diff_from_previous(self):
+    nox = NOxAnalyzer(NOX_ANALYZER)
+    nox._get_raw_data()
+    no_1, nox_1 = nox.data['NO'], nox.data['NOx']
+    nox._get_raw_data()
+    no_2, nox_2 = nox.data['NO'], nox.data['NOx']
+    assert (no_1 != no_2) and (nox_1 != nox_2)

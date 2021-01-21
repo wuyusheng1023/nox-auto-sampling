@@ -1,14 +1,17 @@
 from copy import copy
 
-from data import NOX_ANALYZER, MFC_SETPOINT, UPS
+from .data import NOX_ANALYZER, MFC_SETPOINT, UPS
 
 
-nox = copy(NOX_ANALYZER)
 mfc = {'set': MFC_SETPOINT, 'read': 0}
 ups = UPS
 
-print(f"""
-NOx Analyzer: {nox}
-MFC: {mfc}
-UPS: {UPS}
-""")
+
+class NOxAnalyzer():
+
+  def __init__(self, data=None):
+    if not data:
+      self.data = copy(NOX_ANALYZER)
+
+  def _get_raw_data(self):
+    pass

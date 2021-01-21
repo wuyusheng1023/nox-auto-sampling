@@ -7,6 +7,8 @@ class TestGetRandomCoef():
   def test_get_random_coef_returns_a_number(self):
     assert type(get_random_coef()) is float
   
+  def test_get_random_coef_with_in_the_range(self):
+    assert all([0.9925 <= get_random_coef() <= 1.0075 for i in range(100)])
 
 
 class TestNOxAnalyzer():

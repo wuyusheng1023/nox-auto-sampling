@@ -22,5 +22,5 @@ class NOxAnalyzer():
     self.data = copy(NOX_ANALYZER)
 
   def _get_raw_data(self):
-    # self.data = None
-    pass
+    self.data['NO'] *= get_random_coef()
+    self.data['NOx'] *= get_random_coef()

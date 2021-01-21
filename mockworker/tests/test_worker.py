@@ -10,6 +10,9 @@ class TestGetRandomCoef():
   def test_get_random_coef_with_in_the_range(self):
     assert all([0.9925 <= get_random_coef() <= 1.0075 for i in range(100)])
 
+  def test_get_random_coef_gives_diff_values_each_time(self):
+    assert get_random_coef() != get_random_coef()
+
 
 class TestNOxAnalyzer():
 

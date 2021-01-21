@@ -27,6 +27,10 @@ class NOxAnalyzer():
   def __init__(self, data=None):
     self.data = copy(NOX_ANALYZER)
 
-  def _get_raw_data(self):
-    self.data['NO'] *= get_random_coef()
-    self.data['NOx'] *= get_random_coef()
+  def _get_mock_raw_data(self, set_points):
+    prev_no = self.data['NO']
+    diff_no = set_points['NO'] - prev_no
+    self.data['NO'] = prev_no*get_random_coef() + diff_no*0.2
+    prev_nox = self.data['NOx']
+    diff_nox = set_points['NOx'] - prev_nox
+    self.data['NOx'] = prev_nox*get_random_coef() + diff_no*0.2

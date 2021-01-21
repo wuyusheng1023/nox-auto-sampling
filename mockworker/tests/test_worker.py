@@ -37,15 +37,17 @@ class TestNOxAnalyzer():
     nox = NOxAnalyzer(NOX_ANALYZER)
     assert nox.data == NOX_ANALYZER
 
-  def test_get_raw_data_is_nonempty(self):
+  def test_get_mock_raw_data_is_nonempty(self):
     nox = NOxAnalyzer(NOX_ANALYZER)
-    nox._get_raw_data()
+    set_points = {'NO': NOX_ANALYZER['NO'], 'NOx': NOX_ANALYZER['NOx']}
+    nox._get_mock_raw_data(set_points)
     assert nox.data
   
-  def test_get_raw_data_is_diff_from_previous(self):
+  def test_get_mock_raw_data_is_diff_from_previous(self):
     nox = NOxAnalyzer(NOX_ANALYZER)
-    nox._get_raw_data()
+    set_points = {'NO': NOX_ANALYZER['NO'], 'NOx': NOX_ANALYZER['NOx']}
+    nox._get_mock_raw_data(set_points)
     no_1, nox_1 = nox.data['NO'], nox.data['NOx']
-    nox._get_raw_data()
+    nox._get_mock_raw_data(set_points)
     no_2, nox_2 = nox.data['NO'], nox.data['NOx']
     assert (no_1 != no_2) and (nox_1 != nox_2)

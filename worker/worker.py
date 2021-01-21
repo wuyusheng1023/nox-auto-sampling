@@ -36,6 +36,10 @@ class NOxAnalyzer():
     diff_nox = set_points['NOx'] - prev_nox
     self.data['NOx'] = prev_nox*get_random_coef() + diff_no*0.2
 
-  def push_data_to_redis(self, data=None, ttl=60):
+  def push_data_to_redis(self, data=None):
     if data:
       self.r.lpush('data', data)
+    # else:
+    #   data = {}
+    #   data['datetime'] = 
+    #   self.r.lpush()

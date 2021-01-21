@@ -21,7 +21,7 @@ class NOxAnalyzer():
     self.data['NO'] = prev_no*get_random_coef() + diff_no*0.2
     prev_nox = self.data['NOx']
     diff_nox = set_points['NOx'] - prev_nox
-    self.data['NOx'] = prev_nox*get_random_coef() + diff_no*0.2
+    self.data['NOx'] = prev_nox*get_random_coef() + diff_nox*0.2
     return self.data
 
   def push_mock_data_to_redis(self, data=None):

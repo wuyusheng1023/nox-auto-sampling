@@ -11,3 +11,4 @@ references.md
 playground/
 .pytest_cache
 To-Do.md
+*.pyc

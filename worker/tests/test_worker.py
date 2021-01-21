@@ -6,7 +6,8 @@ import pytest
 import redis
 
 from ..mock_data import NOX_ANALYZER
-from ..worker import get_random_coef, set_init_mock_redis, NOxAnalyzer
+from ..nox_analyzer import NOxAnalyzer
+from ..worker import get_random_coef, set_init_mock_redis
 
 
 class TestGetRandomCoef():

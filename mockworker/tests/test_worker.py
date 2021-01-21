@@ -1,5 +1,12 @@
 from ..data import NOX_ANALYZER
-from ..worker import NOxAnalyzer
+from ..worker import get_random_coef, NOxAnalyzer
+
+
+class TestGetRandomTest():
+
+  def test_get_random_coef_returns_a_number(self):
+    assert type(get_random_coef()) is float
+  
 
 
 class TestNOxAnalyzer():

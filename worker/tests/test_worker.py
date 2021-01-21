@@ -1,3 +1,5 @@
+from time import sleep
+
 import redis
 
 from ..mock_data import NOX_ANALYZER
@@ -51,3 +53,14 @@ class TestNOxAnalyzer():
     nox._get_mock_raw_data(set_points)
     no_2, nox_2 = nox.data['NO'], nox.data['NOx']
     assert (no_1 != no_2) and (nox_1 != nox_2)
+
+  def test_push_given_data_to_redis(self):
+    r = redis.Redis(host='localhost', port=6379, db=0)
+    nox = NOxAnalyzer(NOX_ANALYZER)
+    nox.push_data_to_redis('111')
+    nox.push_data_to_redis('222')
+    sleep(0.1)
+    x_1 = r.rpop('data').decode("utf-8")
+    x_2 = r.rpop('data').decode("utf-8")
+    assert x_1 == '111'
+    assert x_2 == '222'

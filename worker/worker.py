@@ -26,6 +26,7 @@ class NOxAnalyzer():
 
   def __init__(self, data=None):
     self.data = copy(NOX_ANALYZER)
+    self.r = redis.Redis(host='localhost', port=6379, db=0)
 
   def _get_mock_raw_data(self, set_points):
     prev_no = self.data['NO']
@@ -34,3 +35,7 @@ class NOxAnalyzer():
     prev_nox = self.data['NOx']
     diff_nox = set_points['NOx'] - prev_nox
     self.data['NOx'] = prev_nox*get_random_coef() + diff_no*0.2
+
+  def push_data_to_redis(self, data=None, ttl=60):
+    if data:
+      self.r.lpush('data', data)

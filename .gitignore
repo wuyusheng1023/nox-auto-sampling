@@ -12,3 +12,4 @@ playground/
 .pytest_cache
 To-Do.md
 *.pyc
+dbdata

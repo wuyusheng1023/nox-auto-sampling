@@ -1,9 +1,10 @@
-import numpy as np
+import random
+
 import redis
 
 
 def get_random_coef():
-  x = np.random.normal(1, 0.0025)
+  x = random.gauss(1, 0.0025)
   x = 1.0075 if x > 1.0075 else x
   x = 0.9925 if x < 0.9925 else x
   return x

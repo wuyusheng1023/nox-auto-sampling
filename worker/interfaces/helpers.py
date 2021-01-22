@@ -1,7 +1,8 @@
+import os
 import random
 
 import redis
-host = 'redis'
+host = 'redis' if os.environ['DEPLOYMENT'] == 'true' else 'localhost'
 
 
 def get_random_coef():

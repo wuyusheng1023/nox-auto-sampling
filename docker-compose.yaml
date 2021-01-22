@@ -2,6 +2,8 @@ version: "3"
 services:
   worker:
     build: ./worker
+    environment:
+      DEPLOYMENT: 'true'
     depends_on:
       - redis
   redis:

@@ -1,6 +1,7 @@
 import random
 
 import redis
+host = 'localhost'
 
 
 def get_random_coef():
@@ -11,7 +12,7 @@ def get_random_coef():
 
 
 def set_init_mock_redis():
-  r = redis.Redis(host='localhost', port=6379, db=0)
+  r = redis.Redis(host=host, port=6379, db=0)
   r.set('status', '0')
 
 

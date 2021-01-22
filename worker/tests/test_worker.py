@@ -3,7 +3,9 @@ from datetime import datetime
 import json
 
 import pytest
+
 import redis
+host = 'localhost'
 
 from interfaces.mock_data import NOX_ANALYZER
 from interfaces.nox_analyzer import NOxAnalyzer
@@ -25,12 +27,12 @@ class TestGetRandomCoef():
 class TestRedis():
 
   def test_redis_server_is_on(self):
-    r = redis.Redis(host='localhost', port=6379, db=0)
+    r = redis.Redis(host=host, port=6379, db=0)
     r.set('foo', 'bar')  # True
     assert r.get('foo') == b'bar'
 
   def test_set_init_mock_redis(self):
-    r = redis.Redis(host='localhost', port=6379, db=0)
+    r = redis.Redis(host=host, port=6379, db=0)
     r.delete('status')
     set_init_mock_redis()
     v = r.get('status').decode('utf-8')
@@ -59,7 +61,7 @@ class TestNOxAnalyzer():
     assert (no_1 != no_2) and (nox_1 != nox_2)
 
   def test_push_given_data_to_redis(self):
-    r = redis.Redis(host='localhost', port=6379, db=0)
+    r = redis.Redis(host=host, port=6379, db=0)
     nox = NOxAnalyzer(NOX_ANALYZER)
     while r.rpop('data'):
       r.rpop('data')
@@ -72,7 +74,7 @@ class TestNOxAnalyzer():
     assert x_2 == '222'
 
   def test_parse_data_from_redis(self):
-    r = redis.Redis(host='localhost', port=6379, db=0)
+    r = redis.Redis(host=host, port=6379, db=0)
     params = NOX_ANALYZER
     params['datetime'] = str(datetime.utcnow())
     data = {'data': 'NOx analyzer', 'params': params}
@@ -84,7 +86,7 @@ class TestNOxAnalyzer():
     assert all([x in data['params'].keys() for x in NOX_ANALYZER.keys()])
 
   def test_push_nox_mock_data_to_redis(self):
-    r = redis.Redis(host='localhost', port=6379, db=0)
+    r = redis.Redis(host=host, port=6379, db=0)
     nox = NOxAnalyzer(NOX_ANALYZER)
     while r.rpop('data'):
       r.rpop('data')

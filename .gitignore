@@ -1,15 +1,13 @@
 .vscode/
+.pytest_cache
 venv/
 docs/
+dbdata/
 
 .DS_Store
-
 __pycache__
+*.pyc
 
 software_development.md
 references.md
-playground/
-.pytest_cache
 To-Do.md
-*.pyc
-dbdata

@@ -3,7 +3,7 @@ from datetime import datetime
 import json
 
 import redis
-host = 'localhost'
+host = 'redis'
 
 from .mock_data import NOX_ANALYZER
 from .helpers import get_random_coef

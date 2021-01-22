@@ -1,7 +1,7 @@
 import random
 
 import redis
-host = 'localhost'
+host = 'redis'
 
 
 def get_random_coef():

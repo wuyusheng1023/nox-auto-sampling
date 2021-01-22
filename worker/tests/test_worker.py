@@ -5,7 +5,7 @@ import json
 import pytest
 
 import redis
-host = 'localhost'
+host = 'redis'
 
 from interfaces.mock_data import NOX_ANALYZER
 from interfaces.nox_analyzer import NOxAnalyzer

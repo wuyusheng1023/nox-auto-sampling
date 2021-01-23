@@ -14,4 +14,4 @@ while True:
     item = json.loads(r.rpop('data').decode('utf-8'))
     print(f'Pop one item:\n{item}\n')
   
-  time.sleep(0.1)
+  time.sleep(2)

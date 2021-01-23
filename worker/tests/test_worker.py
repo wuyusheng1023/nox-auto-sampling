@@ -13,7 +13,7 @@ except KeyError:
 
 from interfaces.mock_data import NOX_ANALYZER
 from interfaces.nox_analyzer import NOxAnalyzer
-from interfaces.helpers import get_random_coef, set_init_mock_redis
+from interfaces.helpers import get_random_coef, set_init_mock_redis, pop_expired_redis
 
 
 class TestGetRandomCoef():
@@ -41,6 +41,14 @@ class TestRedis():
     set_init_mock_redis()
     v = r.get('status').decode('utf-8')
     assert v == '0'
+
+  def test_pop_expired_items_from_redis_list(self):
+    r = redis.Redis(host=host, port=6379, db=0)
+    r.delete('data')
+    for i in range(10):
+      r.lpush('data', i)
+    pop_expired_redis(r, 5)
+    assert r.llen('data') <= 5
 
 
 class TestNOxAnalyzer():

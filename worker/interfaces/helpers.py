@@ -20,7 +20,10 @@ def set_init_mock_redis():
   r.set('status', '0')
 
 
+def pop_expired_redis(r, list_len=1000):
+  while r.llen('data') > list_len:
+    r.rpop('data')
+
 # TODO
-# - read Redis data
 # - if Redis list is too big, pop old items
 # - read system time exactly

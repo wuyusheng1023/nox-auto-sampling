@@ -3,6 +3,7 @@ services:
   worker:
     build: ./worker
     restart: always
+    command: python run.py
     environment:
       DEPLOYMENT: 'true'
     depends_on:

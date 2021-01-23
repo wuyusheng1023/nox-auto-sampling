@@ -2,19 +2,27 @@ version: "3"
 services:
   web:
     build: ./backend
+    # image: web
     restart: always
+    environment:
+      DEPLOYMENT: 'true'
     command: python manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
     depends_on:
       - redis
       - db
+  # migration:
+  #   image: web
+  #   command: python manage.py migrate --noinput
+  #   depends_on:
+  #     - db
   worker:
     build: ./worker
     restart: always
-    command: python run.py
     environment:
       DEPLOYMENT: 'true'
+    command: python run.py
     depends_on:
       - redis
   db:

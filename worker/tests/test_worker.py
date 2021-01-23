@@ -23,10 +23,8 @@ class TestTimeChecker():
     time_checker_2 = TimeChecker(2)
     sleep(0.9)
     assert time_checker_2.detect_alarm() == False
-    assert time_checker_2.alarm == False
     sleep(1.2)
     assert time_checker_2.detect_alarm() == True
-    assert time_checker_2.alarm == True
 
 
 class TestGetRandomCoef():

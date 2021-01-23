@@ -31,21 +31,14 @@ class TimeChecker():
   def __init__(self, interval=1):
     self._interval = max([1, math.floor(interval)])
     self._t_prev = datetime.now()
-    self._alarm = False
 
   def detect_alarm(self):
     now = datetime.now()
+    print(now)
+    print(self._t_prev)
+    print("---------------------")
     if math.floor(now.timestamp()) - math.floor(self._t_prev.timestamp()) >= self._interval:
       self._t_prev = now
-      self._alarm = True
       return True
     else:
       return False
-  
-  @property
-  def alarm(self):
-    return self._alarm
-
-  @alarm.setter
-  def alarm(self, alarm):
-    self._alarm = alarm

@@ -18,14 +18,14 @@ from interfaces.helpers import get_random_coef, set_init_mock_redis, pop_expired
 
 
 class TestTimeChecker():
-  
+
   def test_time_checker_alarm(self):
     time_checker_2 = TimeChecker(2)
     sleep(0.9)
-    time_checker_2.detect_alarm()
+    assert time_checker_2.detect_alarm() == False
     assert time_checker_2.alarm == False
     sleep(1.2)
-    time_checker_2.detect_alarm()
+    assert time_checker_2.detect_alarm() == True
     assert time_checker_2.alarm == True
 
 

@@ -38,6 +38,9 @@ class TimeChecker():
     if math.floor(now.timestamp()) - math.floor(self._t_prev.timestamp()) >= self._interval:
       self._t_prev = now
       self._alarm = True
+      return True
+    else:
+      return False
   
   @property
   def alarm(self):

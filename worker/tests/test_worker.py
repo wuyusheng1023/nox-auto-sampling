@@ -18,13 +18,13 @@ from interfaces.helpers import get_random_coef, set_init_mock_redis, pop_expired
 
 
 def test_time_checker_alarm():
-  time_checker_1 = TimeChecker(2)
+  time_checker_2 = TimeChecker(2)
   sleep(0.9)
-  time_checker_1.detect_alarm()
-  assert time_checker_1.alarm == False
+  time_checker_2.detect_alarm()
+  assert time_checker_2.alarm == False
   sleep(1.2)
-  time_checker_1.detect_alarm()
-  assert time_checker_1.alarm == True
+  time_checker_2.detect_alarm()
+  assert time_checker_2.alarm == True
 
 
 class TestGetRandomCoef():

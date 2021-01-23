@@ -3,6 +3,7 @@
 venv/
 docs/
 dbdata/
+static/
 
 .DS_Store
 __pycache__

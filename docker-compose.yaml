@@ -1,22 +1,27 @@
 version: "3"
+
 services:
   web:
     build: ./backend
-    # image: web
     restart: always
     environment:
       DEPLOYMENT: 'true'
     command: python manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
+    volumes:
+      - static:/static
     depends_on:
       - redis
       - db
-  # migration:
-  #   image: web
-  #   command: python manage.py migrate --noinput
-  #   depends_on:
-  #     - db
+  nginx:
+    build: ./nginx
+    volumes:
+      - static:/static
+    ports:
+      - "80:80"
+    depends_on:
+      - web
   worker:
     build: ./worker
     restart: always
@@ -39,3 +44,6 @@ services:
     restart: always
     ports:
       - "6379:6379"
+
+volumes:
+  static:

@@ -13,7 +13,18 @@ except KeyError:
 
 from interfaces.mock_data import NOX_ANALYZER
 from interfaces.nox_analyzer import NOxAnalyzer
+from interfaces.helpers import TimeChecker
 from interfaces.helpers import get_random_coef, set_init_mock_redis, pop_expired_redis
+
+
+def test_time_checker_alarm():
+  time_checker_1 = TimeChecker(2)
+  sleep(0.9)
+  time_checker_1.detect_alarm()
+  assert time_checker_1.alarm == False
+  sleep(1.2)
+  time_checker_1.detect_alarm()
+  assert time_checker_1.alarm == True
 
 
 class TestGetRandomCoef():

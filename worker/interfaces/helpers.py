@@ -1,5 +1,7 @@
 import os
 import random
+from datetime import datetime
+import math
 
 import redis
 try:
@@ -24,6 +26,23 @@ def pop_expired_redis(r, list_len=1000):
   while r.llen('data') > list_len:
     r.rpop('data')
 
-# TODO
-# - if Redis list is too big, pop old items
-# - read system time exactly
+
+class TimeChecker():
+  def __init__(self, interval=1):
+    self._interval = max([1, math.floor(interval)])
+    self._t_prev = datetime.now()
+    self._alarm = False
+
+  def detect_alarm(self):
+    now = datetime.now()
+    if math.floor(now.timestamp()) - math.floor(self._t_prev.timestamp()) >= self._interval:
+      self._t_prev = now
+      self._alarm = True
+  
+  @property
+  def alarm(self):
+    return self._alarm
+
+  @alarm.setter
+  def alarm(self, alarm):
+    self._alarm = alarm

@@ -4,7 +4,10 @@ from datetime import datetime
 import json
 
 import redis
-host = 'redis' if os.environ['DEPLOYMENT'] == 'true' else 'localhost'
+try:
+  host = 'redis' if os.environ['DEPLOYMENT'] == 'true' else 'localhost'
+except KeyError:
+  host = 'localhost'
 
 from .mock_data import NOX_ANALYZER
 from .helpers import get_random_coef

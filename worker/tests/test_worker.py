@@ -6,7 +6,10 @@ import json
 import pytest
 
 import redis
-host = 'redis' if os.environ['DEPLOYMENT'] == 'true' else 'localhost'
+try:
+  host = 'redis' if os.environ['DEPLOYMENT'] == 'true' else 'localhost'
+except KeyError:
+  host = 'localhost'
 
 from interfaces.mock_data import NOX_ANALYZER
 from interfaces.nox_analyzer import NOxAnalyzer

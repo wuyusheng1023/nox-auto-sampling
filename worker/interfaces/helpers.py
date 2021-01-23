@@ -34,9 +34,6 @@ class TimeChecker():
 
   def detect_alarm(self):
     now = datetime.now()
-    print(now)
-    print(self._t_prev)
-    print("---------------------")
     if math.floor(now.timestamp()) - math.floor(self._t_prev.timestamp()) >= self._interval:
       self._t_prev = now
       return True

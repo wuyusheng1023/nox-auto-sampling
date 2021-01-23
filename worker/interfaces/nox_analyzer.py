@@ -3,22 +3,16 @@ from copy import copy
 from datetime import datetime
 import json
 
-import redis
-try:
-  host = 'redis' if os.environ['DEPLOYMENT'] == 'true' else 'localhost'
-except KeyError:
-  host = 'localhost'
-
 from .mock_data import NOX_ANALYZER
 from .helpers import get_random_coef
 
 
 class NOxAnalyzer():
 
-  def __init__(self, data=None, status='0'):
+  def __init__(self, r, status='0'):
     self.data = copy(NOX_ANALYZER)
     self.status = status
-    self.r = redis.Redis(host=host, port=6379, db=0)
+    self.r = r
 
   def _get_mock_raw_data(self, set_points):
     prev_no = self.data['NO']

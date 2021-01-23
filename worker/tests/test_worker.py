@@ -65,17 +65,20 @@ class TestRedis():
 class TestNOxAnalyzer():
 
   def test_class_init_properly_with_mock_data(self):
-    nox = NOxAnalyzer(NOX_ANALYZER)
+    r = redis.Redis(host=host, port=6379, db=0)
+    nox = NOxAnalyzer(r)
     assert nox.data == NOX_ANALYZER
 
   def test_get_mock_raw_data_is_nonempty(self):
-    nox = NOxAnalyzer(NOX_ANALYZER)
+    r = redis.Redis(host=host, port=6379, db=0)
+    nox = NOxAnalyzer(r)
     set_points = {'NO': NOX_ANALYZER['NO'], 'NOx': NOX_ANALYZER['NOx']}
     nox._get_mock_raw_data(set_points)
     assert nox.data
   
   def test_get_mock_raw_data_is_diff_from_previous(self):
-    nox = NOxAnalyzer(NOX_ANALYZER)
+    r = redis.Redis(host=host, port=6379, db=0)
+    nox = NOxAnalyzer(r)
     set_points = {'NO': NOX_ANALYZER['NO'], 'NOx': NOX_ANALYZER['NOx']}
     nox._get_mock_raw_data(set_points)
     no_1, nox_1 = nox.data['NO'], nox.data['NOx']
@@ -85,7 +88,7 @@ class TestNOxAnalyzer():
 
   def test_push_given_data_to_redis(self):
     r = redis.Redis(host=host, port=6379, db=0)
-    nox = NOxAnalyzer(NOX_ANALYZER)
+    nox = NOxAnalyzer(r)
     while r.rpop('data'):
       r.rpop('data')
     nox.push_mock_data_to_redis(data='111')
@@ -110,7 +113,7 @@ class TestNOxAnalyzer():
 
   def test_push_nox_mock_data_to_redis(self):
     r = redis.Redis(host=host, port=6379, db=0)
-    nox = NOxAnalyzer(NOX_ANALYZER)
+    nox = NOxAnalyzer(r)
     while r.rpop('data'):
       r.rpop('data')
     nox.push_mock_data_to_redis()

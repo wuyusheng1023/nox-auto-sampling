@@ -11,9 +11,9 @@ services:
       - "8000:8000"
     volumes:
       - static:/static
+      - ./dbdata:/app/dbdata
     depends_on:
       - redis
-      - db
   nginx:
     build: ./nginx
     volumes:
@@ -30,15 +30,6 @@ services:
     command: python run.py
     depends_on:
       - redis
-  db:
-    image: "postgres:13.1-alpine"
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: password123
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./dbdata:/var/lib/postgresql/data
   redis:
     image: "redis:6.0.10-alpine"
     restart: always

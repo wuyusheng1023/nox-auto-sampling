@@ -4,6 +4,7 @@ venv/
 docs/
 dbdata/
 static/
+tabler-react/
 
 .DS_Store
 __pycache__

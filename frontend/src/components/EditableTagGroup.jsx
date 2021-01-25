@@ -99,7 +99,7 @@ export default class EditableTagGroup extends React.Component {
         )}
         {!inputVisible && (
           <Tag onClick={this.showInput} className="site-tag-plus">
-            <PlusOutlined /> New Tag
+            <PlusOutlined /> 添加
           </Tag>
         )}
       </>

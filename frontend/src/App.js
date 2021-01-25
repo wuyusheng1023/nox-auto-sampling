@@ -2,7 +2,7 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import './index.css';
 import { Row, Col } from 'antd';
-import Tab from './components/Tabs'
+import Tabframe from './components/TabFrame'
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
       </Row>
       <Row>
         <Col span={12} offset={6}>
-          <Tab></Tab>
+          <Tabframe></Tabframe>
         </Col>
       </Row>
       <Row>

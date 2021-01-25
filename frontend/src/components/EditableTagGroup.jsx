@@ -8,7 +8,7 @@ import PlusOutlined from '@ant-design/icons/PlusOutlined';
 
 export default class EditableTagGroup extends React.Component {
   state = {
-    tags: ['Tag1', 'Tag 2', 'Tag 3'],
+    tags: this.props.tags,
     inputVisible: false,
     inputValue: '',
     editInputIndex: -1,
@@ -137,7 +137,7 @@ export default class EditableTagGroup extends React.Component {
         )}
         {!inputVisible && (
           <Tag className="site-tag-plus" onClick={this.showInput}>
-            <PlusOutlined /> New Tag
+            <PlusOutlined /> 添加
           </Tag>
         )}
       </>

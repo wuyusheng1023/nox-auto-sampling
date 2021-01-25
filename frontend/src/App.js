@@ -1,7 +1,8 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import './index.css';
-import { Row, Col } from 'antd';
+import Row from 'antd/lib/row';
+import Col from 'antd/lib/col';
 import Tabframe from './components/TabFrame'
 
 function App() {

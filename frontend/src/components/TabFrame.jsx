@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs } from 'antd';
+import Tabs from 'antd/lib/tabs';
 import SettingList from './SettingList'
 
 const { TabPane } = Tabs;

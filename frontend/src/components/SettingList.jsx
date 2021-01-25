@@ -1,6 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { List } from 'antd';
+import List from 'antd/lib/list';
 import EditableTagGroup from './EditableTagGroup'
 
 

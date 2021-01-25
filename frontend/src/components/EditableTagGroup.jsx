@@ -7,11 +7,15 @@ import { PlusOutlined } from '@ant-design/icons';
 
 export default class EditableTagGroup extends React.Component {
   state = {
-    tags: ['Tag 1', 'Tag 2', 'Tag 3'],
+    tags: this.props.tags,
     inputVisible: false,
     inputValue: '',
   };
 
+  componentDidUpdate() {
+    this.props.onUpdate(this.props.name, this.state['tags']);
+  }
+  
   handleClose = removedTag => {
     const tags = this.state.tags.filter(tag => tag !== removedTag);
     console.log(tags);

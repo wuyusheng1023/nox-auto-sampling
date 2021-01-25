@@ -3,6 +3,7 @@ import 'antd/dist/antd.css';
 import { List } from 'antd';
 import EditableTagGroup from './EditableTagGroup'
 
+
 export default function SettingList() {
   let settingData = [
     { 'name': '类型', 'tags': ['校准', '质控', '样品'] },

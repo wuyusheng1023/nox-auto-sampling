@@ -1,21 +1,22 @@
 import React from 'react';
 import './EditableTagGroup.css';
-import { Tag, Input } from 'antd';
-import { TweenOneGroup } from 'rc-tween-one';
+import { Tag, Input, Tooltip } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
 
 export default class EditableTagGroup extends React.Component {
   state = {
-    tags: this.props.tags,
+    tags: ['Tag1', 'Tag 2', 'Tag 3'],
     inputVisible: false,
     inputValue: '',
+    editInputIndex: -1,
+    editInputValue: '',
   };
 
   componentDidUpdate() {
     this.props.onUpdate(this.props.name, this.state['tags']);
   }
-  
+
   handleClose = removedTag => {
     const tags = this.state.tags.filter(tag => tag !== removedTag);
     console.log(tags);
@@ -44,57 +45,88 @@ export default class EditableTagGroup extends React.Component {
     });
   };
 
+  handleEditInputChange = e => {
+    this.setState({ editInputValue: e.target.value });
+  };
+
+  handleEditInputConfirm = () => {
+    this.setState(({ tags, editInputIndex, editInputValue }) => {
+      const newTags = [...tags];
+      newTags[editInputIndex] = editInputValue;
+
+      return {
+        tags: newTags,
+        editInputIndex: -1,
+        editInputValue: '',
+      };
+    });
+  };
+
   saveInputRef = input => {
     this.input = input;
   };
 
-  forMap = tag => {
-    const tagElem = (
-      <Tag
-        closable
-        onClose={e => {
-          e.preventDefault();
-          this.handleClose(tag);
-        }}
-      >
-        {tag}
-      </Tag>
-    );
-    return (
-      <span key={tag} style={{ display: 'inline-block' }}>
-        {tagElem}
-      </span>
-    );
+  saveEditInputRef = input => {
+    this.editInput = input;
   };
 
   render() {
-    const { tags, inputVisible, inputValue } = this.state;
-    const tagChild = tags.map(this.forMap);
+    const { tags, inputVisible, inputValue, editInputIndex, editInputValue } = this.state;
     return (
       <>
-        <div style={{ marginBottom: 16 }}>
-          <TweenOneGroup
-            enter={{
-              scale: 0.8,
-              opacity: 0,
-              type: 'from',
-              duration: 100,
-              onComplete: e => {
-                e.target.style = '';
-              },
-            }}
-            leave={{ opacity: 0, width: 0, scale: 0, duration: 200 }}
-            appear={false}
-          >
-            {tagChild}
-          </TweenOneGroup>
-        </div>
+        {tags.map((tag, index) => {
+          if (editInputIndex === index) {
+            return (
+              <Input
+                ref={this.saveEditInputRef}
+                key={tag}
+                size="small"
+                className="tag-input"
+                value={editInputValue}
+                onChange={this.handleEditInputChange}
+                onBlur={this.handleEditInputConfirm}
+                onPressEnter={this.handleEditInputConfirm}
+              />
+            );
+          }
+
+          const isLongTag = tag.length > 20;
+
+          const tagElem = (
+            <Tag
+              className="edit-tag"
+              key={tag}
+              closable={index >= 0}
+              onClose={() => this.handleClose(tag)}
+            >
+              <span
+                onDoubleClick={e => {
+                  if (index !== 0) {
+                    this.setState({ editInputIndex: index, editInputValue: tag }, () => {
+                      this.editInput.focus();
+                    });
+                    e.preventDefault();
+                  }
+                }}
+              >
+                {isLongTag ? `${tag.slice(0, 20)}...` : tag}
+              </span>
+            </Tag>
+          );
+          return isLongTag ? (
+            <Tooltip title={tag} key={tag}>
+              {tagElem}
+            </Tooltip>
+          ) : (
+              tagElem
+            );
+        })}
         {inputVisible && (
           <Input
             ref={this.saveInputRef}
             type="text"
             size="small"
-            style={{ width: 78 }}
+            className="tag-input"
             value={inputValue}
             onChange={this.handleInputChange}
             onBlur={this.handleInputConfirm}
@@ -102,8 +134,8 @@ export default class EditableTagGroup extends React.Component {
           />
         )}
         {!inputVisible && (
-          <Tag onClick={this.showInput} className="site-tag-plus">
-            <PlusOutlined /> 添加
+          <Tag className="site-tag-plus" onClick={this.showInput}>
+            <PlusOutlined /> New Tag
           </Tag>
         )}
       </>

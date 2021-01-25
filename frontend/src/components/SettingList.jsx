@@ -31,7 +31,6 @@ export default function SettingList() {
     settingData = settingData.map(
         item => item['name'] !== name ? item : {name : name, 'tags': tags }
      )
-     console.log(settingData)
   };
 
   return (
